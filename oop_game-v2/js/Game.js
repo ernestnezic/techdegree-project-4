@@ -107,6 +107,8 @@
             gameWonH1.innerHTML = 'Game over! Better luck next time! :( ';
             overlayDiv.className = 'lose';
         }
+
+        this.resetGame();
      }
 
 
@@ -143,4 +145,23 @@
         });
     }
 
+
+    /**
+     * Resets game including removing previous letters, enabling and reseting the keyboard and reseting plaer's lives
+     */
+    resetGame() {
+        document.getElementById('phrase').firstElementChild.innerHTML = '';
+        
+        const keyElements = document.querySelectorAll('#qwerty button');   
+        for (let i = 0; i < keyElements.length; i++) {
+            keyElements[i].className = 'key';
+            keyElements[i].disabled = false;
+        }
+
+        const lifeImages = document.getElementsByTagName('img');
+        for (let i = 0; i < lifeImages.length; i++) {
+            lifeImages[i].src = 'images/liveHeart.png'
+        }
+       
+    }
  }
