@@ -46,6 +46,10 @@
         
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
+
+        // document.addEventListener('keydown', (e) => {
+            
+        // });
      }
 
 
