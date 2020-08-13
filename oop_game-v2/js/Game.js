@@ -49,23 +49,18 @@
      }
 
 
-     handleInteraction() {
-
-     }
-
-
      /**
       * Checks for winning move
       * @return {boolean} True if game has been won, false if game wasn't won
       */
      checkForWin() {
 
-        let gameWon = false;
+        let gameWon = true;
         const letterLiCollection = document.getElementById('phrase').firstElementChild;
 
         for ( let i = 0; i < letterLiCollection.childElementCount; i++) {
-            if ( letterLiCollection.children[i].className.includes('show')) {
-                gameWon = true;
+            if ( letterLiCollection.children[i].className.includes('hide')) {
+                gameWon = false;
             }
         }
 
@@ -113,5 +108,39 @@
             overlayDiv.className = 'lose';
         }
      }
+
+
+     /**
+      * Handles onscreen keyboard button clicks
+      * @param (HTMLButtonElement) button - The clicked button element
+      */
+     handleInteraction(button) {
+        const keyRowDivs = document.getElementsByClassName('keyrow');
+        let keyArray = [];
+
+        for ( let i = 0; i < keyRowDivs.length; i++) {
+            const keyRow = keyRowDivs[i];
+            for (let j = 0; j < keyRow.childElementCount; j++) {
+                keyArray.push(keyRow.children[j]);
+            }
+        }
+
+        keyArray.forEach( key => {
+            if ( key.innerHTML === button.innerHTML) {
+                if (this.activePhrase.checkLetter(button.innerHTML)) {
+                    key.disabled = true;
+                    key.className = 'chosen';
+                    this.activePhrase.showMatchedLetter(key.innerHTML);
+                    if (this.checkForWin()) {
+                        this.gameOver(true);
+                    }
+                } else {
+                    key.disabled = true;
+                    key.className = 'wrong';
+                    this.removeLife();
+                }
+            }
+        });
+    }
 
  }

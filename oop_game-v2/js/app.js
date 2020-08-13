@@ -4,7 +4,12 @@
 
  let game;
 
+
  document.getElementById('btn__reset').addEventListener('click', () => {
      game = new Game();
      game.startGame();
  });
+
+ document.getElementById('qwerty').addEventListener('click', (event) => {
+     game.handleInteraction(event.target);
+ })
