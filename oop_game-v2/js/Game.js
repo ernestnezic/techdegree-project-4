@@ -47,4 +47,71 @@
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
      }
+
+
+     handleInteraction() {
+
+     }
+
+
+     /**
+      * Checks for winning move
+      * @return {boolean} True if game has been won, false if game wasn't won
+      */
+     checkForWin() {
+
+        let gameWon = false;
+        const letterLiCollection = document.getElementById('phrase').firstElementChild;
+
+        for ( let i = 0; i < letterLiCollection.childElementCount; i++) {
+            if ( letterLiCollection.children[i].className.includes('show')) {
+                gameWon = true;
+            }
+        }
+
+        return gameWon;
+     }
+
+
+     /**
+      * Increases the value of the missed property
+      * Removes a life from the scoreboard
+      * Checks if player has remaining lives and ends game if player is out
+      */
+     removeLife() {
+
+        const scoreboardDiv = document.getElementById('scoreboard');
+        const scoreboardOl = scoreboardDiv.firstElementChild;
+        const scoreboardLiCollection = scoreboardOl.children;
+
+        let changingImage = null;
+
+        if (this.missed < 4) {
+            scoreboardLiCollection[this.missed].firstElementChild.src = 'images/lostHeart.png'
+            this.missed++;
+        } else {
+            this.gameOver(false);
+        }
+     }
+
+
+     /**
+      * Displays game over message
+      * @param {boolean} gameWon - Whether or not the user won the game
+      */
+     gameOver(gameWon) {
+       
+        const gameWonH1 = document.getElementById('game-over-message');
+        const overlayDiv = gameWonH1.parentNode;
+        overlayDiv.style.display = 'block';
+       
+        if (gameWon) {
+            gameWonH1.innerHTML = 'Congrats! You won! :) ';
+            overlayDiv.className = 'win';
+        } else {
+            gameWonH1.innerHTML = 'Game over! Better luck next time! :( ';
+            overlayDiv.className = 'lose';
+        }
+     }
+
  }

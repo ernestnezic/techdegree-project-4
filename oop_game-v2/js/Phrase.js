@@ -29,4 +29,41 @@
             phraseUl.appendChild(letter);
         }
     }
+
+    
+    /**
+     * Checks if passes letter is in phrase
+     * @param (string) letter - Letter to check
+     */
+    checkLetter(letter) {
+
+        let letterContained = false;
+
+        for (let i = 0; i < this.phrase.length; i++) {
+            if (this.phrase[i] === letter) {
+                letterContained = true;
+            }
+        }
+
+        return letterContained;
+    }
+
+
+    /**
+     * Displays passed letter on screen after a match is found
+     * @param (string) letter - Letter to display
+     */
+    showMatchedLetter(letter) {
+        
+        const letterLiCollection = document.getElementById('phrase').firstElementChild;
+        
+        for ( let i = 0; i < letterLiCollection.childElementCount; i++) {
+            
+            const currentLi = letterLiCollection.children[i];
+
+            if (currentLi.innerHTML === letter ) {
+                currentLi.className = `show letter ${letter}`;
+            }
+        }
+    }
  }
