@@ -11,5 +11,8 @@
  });
 
  document.getElementById('qwerty').addEventListener('click', (event) => {
-     game.handleInteraction(event.target);
+
+    if ( event.target.className !== 'keyrow') {
+        game.handleInteraction(event.target);
+    }
  })
